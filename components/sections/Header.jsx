@@ -68,7 +68,7 @@ function Header() {
           </span>
         </div>
         <div>
-          <Image src={logo} alt="" className="w-[14rem]" />
+          <Image src={logo} alt="" className="w-[10rem]" />
         </div>
         <div>
           <span>

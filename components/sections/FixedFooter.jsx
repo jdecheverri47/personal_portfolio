@@ -30,28 +30,42 @@ function FixedFooter() {
     let lastScroll = 0;
 
     function handleScroll() {
-      const currentScroll =
-        window.scrollY || document.documentElement.scrollTop;
-      const isScrolledToBottom =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight;
+        const currentScroll =
+            window.scrollY || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.body.offsetHeight;
 
-      const isScrollingDown = currentScroll > lastScroll;
-      const isScrollingUp = currentScroll < lastScroll;
+        const isScrolledToBottom =
+            windowHeight + currentScroll >= documentHeight;
 
-      const isScrolling = isScrollingDown && !isScrolledToBottom;
+        const isScrollingDown = currentScroll > lastScroll;
+        const isScrollingUp = currentScroll < lastScroll;
 
-      if (isScrolling) {
-        setShowFooter(false);
-      } else if (isScrollingUp || isScrolledToBottom) {
-        setShowFooter(true);
-      }
+        const isScrolling = isScrollingDown && !isScrolledToBottom;
+        const isAtTop = currentScroll === 0;
 
-      lastScroll = currentScroll;
+        if (isScrolling && !isScrolledToBottom) {
+            setShowFooter(false);
+        } else if ((isScrollingUp && !isAtTop) || isScrolledToBottom) {
+            setShowFooter(true);
+        }
+        lastScroll = currentScroll;
+    }
+
+    function handleResize() {
+        // Recalculate on window resize
+        handleScroll();
     }
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listeners
+    return () => {
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("resize", handleResize);
+    };
+}, []);
 
   return (
     <div

@@ -4,12 +4,14 @@ import Image from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/src/ScrollTrigger";
 
-import weblabMockup from "@/public/images/weblab_mockup.png";
+import weblabMockup from "@/public/images/weblabs.png";
 import payMockup from "@/public/images/pay&park_mockup.png";
 import tutarjetaMockup from "@/public/images/tutarjetadigital.png";
+import enlace from "@/public/images/enlace.png";
 
 gsap.registerPlugin(ScrollTrigger);
 import { useLayoutEffect, useRef, useEffect } from "react";
+import Link from "next/link";
 
 function Projects() {
   const textOne = useRef(null);
@@ -39,6 +41,18 @@ function Projects() {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".weblabs-container h1", {
+        y: 250,
+        ease: "power4.out",
+        duration: 3.5,
+        scrollTrigger: {
+          trigger: ".weblabs-main",
+          start: "top center",
+          toggleActions: "play none none none",
+          // markers: true,
+        },
+      });
+
+      gsap.from(".weblabs-container img", {
         y: 250,
         ease: "power4.out",
         duration: 3.5,
@@ -177,9 +191,12 @@ function Projects() {
             />
 
             <div className="xs:w-[25rem] xs:h-[15rem] px-[1rem] sm:w-[35rem] sm:h-[30rem] sm:pl-[2rem] ">
-              <div className="weblabs-container overflow-hidden mt-10">
-                <h1 className="subtitle">WebLabs</h1>
-              </div>
+              <Link href="https://weblabs.com.co">
+                <div className="weblabs-container overflow-hidden mt-10 flex w-fit transition-all ease-in-out duration-500 hover:opacity-50 hover:cursor-pointer">
+                  <h1 className="subtitle ">WebLabs</h1>
+                  <Image src={enlace} alt="" className="w-5 h-5 ml-2" />
+                </div>
+              </Link>
 
               <div className="project one">
                 <p className="text-xl font-normal pt-5">

@@ -47,7 +47,7 @@ function Footer() {
 
   return (
     <section className="footer">
-      <div className="w-full h-full flex flex-col justify-center items-center pt-[5rem]">
+      <div className="w-full h-full flex flex-col justify-center items-center ">
         <div className="container-title-footer">
           <h1 className="subtitle uppercase idea">Have an idea?</h1>
         </div>
